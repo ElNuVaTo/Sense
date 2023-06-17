@@ -1,4 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Carme&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
+
 :root {
-  --Fondo: black;
+  --Fondo: #161e2e;
+
+  --Principal: #1e2837;
+  --Principal-Monocromatico: #283548;
+
+  --secundario: #fde07b;
+  --secundario-monocromatico: #fabe24;
+
+  --Error: #ff595e;
+  --Modal: #c0d6eb;
 }
 
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--Fondo);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Carme", sans-serif;
+  color: white;
+}
+
+h1 {
+  font-size: 26px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 22px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 18px;
+}
+h6 {
+  font-size: 16px;
+}
+
+p,
+b,
+em {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 17px;
+  color: #ddd;
+}
+label {
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
+  color: #ddd;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: white;
+  font-family: "Carme", sans-serif;
+  font-size: 18px;
+}
+::placeholder {
+  color: #8e98a2;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: "Nunito Sans", sans-serif;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 17px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

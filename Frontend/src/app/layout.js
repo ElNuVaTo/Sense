@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import StyledJsxRegistry from "@/settings/StyleRegistry";
+import Navegacion from "@/components/navegacion/Navegacion";
 import { ColorAleatorioProvider } from "@/context/ColorAleatorio";
 import { UsuarioVistaPreviaProvider } from "@/context/UsuarioVistaPrevia";
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <StyledJsxRegistry>
           <UsuarioVistaPreviaProvider>
-            <ColorAleatorioProvider>{children}</ColorAleatorioProvider>
+            <ColorAleatorioProvider>
+            <Navegacion/>
+            {children}</ColorAleatorioProvider>
           </UsuarioVistaPreviaProvider>
         </StyledJsxRegistry>
       </body>
