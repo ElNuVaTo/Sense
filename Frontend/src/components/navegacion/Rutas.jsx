@@ -86,6 +86,7 @@ const Rutas = () => {
 
     params === "/iniciar-sesion" ? (animacionActual = "exit") : null;
     params === "/registrarse" ? (animacionActual = "exit") : null;
+    params === "/configuracion" ? (animacionActual = "exit") : null;
 
     return animacionActual;
   };

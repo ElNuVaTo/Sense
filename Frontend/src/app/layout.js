@@ -2,7 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import StyledJsxRegistry from "@/settings/StyleRegistry";
 import Navegacion from "@/components/navegacion/Navegacion";
-import { ColorAleatorioProvider } from "@/context/ColorAleatorio";
+import { ColorAleatorioProvider } from "@/context/ConseguirColorAleatorio";
 import { UsuarioVistaPreviaProvider } from "@/context/UsuarioVistaPrevia";
 
 const inter = Inter({ subsets: ["latin"] });
