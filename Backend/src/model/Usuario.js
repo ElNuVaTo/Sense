@@ -7,9 +7,6 @@ const emailRegex =
 const Schema = mongoose.Schema;
 
 const usuarioSchema = new Schema({
-  nombreDeUsuario: {
-    type: String,
-  },
   email: {
     type: String,
     unique: true,
@@ -28,6 +25,12 @@ const usuarioSchema = new Schema({
   confirmar: {
     type: String,
     required: [true, "La contraseña no coincide"],
+  },
+  src: {
+    type: String,
+  },
+  nombreDeUsuario: {
+    type: String,
   },
   publicaciones: [
     {

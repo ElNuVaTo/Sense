@@ -7,8 +7,7 @@ import Usuario from "../model/Usuario";
 
 const router = express.Router();
 
-// Ruta protegida
-router.get("/toda-las/publicaciones", async (req, res) => {
+router.get("/get-all", async (req, res) => {
   try {
     const dataBase = await Publicacion.find();
     res.status(200).json(dataBase);
@@ -19,6 +18,65 @@ router.get("/toda-las/publicaciones", async (req, res) => {
     });
   }
 });
+
+router.post("/me-gusta/:id", autenticacionMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Buscar la publicación por su ID
+    const publicacion = await Publicacion.findById(id);
+
+    if (!publicacion) {
+      return res.status(404).json({ error: "Publicación no encontrada" });
+    }
+
+    // Incrementar el contador de likes
+    publicacion.likes += 1;
+
+    // Guardar los cambios
+    await publicacion.save();
+
+    // Enviar la respuesta con la publicación actualizada
+    res.json(publicacion);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al procesar la solicitud" });
+  }
+});
+
+
+router.delete("/no-me-gusta/:id", autenticacionMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Buscar la publicación por su ID
+    const publicacion = await Publicacion.findById(id);
+
+    if (!publicacion) {
+      return res.status(404).json({ error: "Publicación no encontrada" });
+    }
+
+    // Verificar si el usuario ya dio like a la publicación
+    const index = publicacion.likes.findIndex((userId) => userId === req.user.id);
+
+    if (index === -1) {
+      return res.status(400).json({ error: "El usuario no ha dado like a esta publicación" });
+    }
+
+    // Quitar el like del usuario
+    publicacion.likes.splice(index, 1);
+
+    // Guardar los cambios
+    await publicacion.save();
+
+    // Enviar la respuesta con la publicación actualizada
+    res.json(publicacion);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al procesar la solicitud" });
+  }
+});
+
 
 router.post("/publicar", autenticacionMiddleware, async (req, res) => {
   const body = req.body;

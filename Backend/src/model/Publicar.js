@@ -3,17 +3,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const publiSchema = new Schema({
-  nombre: String,
-  des: String,
   src: String,
-  colorFondoBody: String,
+  nombre: String,
+  desc: String,
+  colorCuerpo: String,
   colorNavegacion: String,
-  colorFondoPerfil: String,
-  colorBorderSolid: String,
-  colorButton: String,
-  colorTextNavegacion: String,
-  colorTextNombre: String,
-  colorTextDescripcion: String,
+  colorComponente: String,
+  colorBoton: String,
+  colorBotonHover: String,
+  colorLink: String,
+  colorNombre: String,
+  colorDesc: String,
+  likes: { type: Number, default: 0 },
 });
 
 const Publicacion = mongoose.model("Publicacion", publiSchema);
