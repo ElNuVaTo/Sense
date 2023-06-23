@@ -7,7 +7,7 @@ import axios from "axios";
 const UseStateContext = createContext();
 
 const UseStateProvider = ({ children }) => {
-  const router = useRouter()
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [manejoDeError, setManejoDeError] = useState({
@@ -22,19 +22,24 @@ const UseStateProvider = ({ children }) => {
     e.preventDefault();
 
     axios
-      .post(process.env.INICIAR_SESION, {
-        email: email,
-        contraseña: contraseña,
-      })
+      .post(
+        process.env.INICIAR_SESION,
+        {
+          email: email,
+          contraseña: contraseña,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
-        console.log(response);
         localStorage.setItem("Usuario", true);
         router.push("/");
       })
       .catch((error) => {
         setManejoDeError({
           boolean: true,
-          texto: error.response,
+          texto: "Contraseña o Correo electronico incorrecto, intenta de nuevo",
         });
       });
   };

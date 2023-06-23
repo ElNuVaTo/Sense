@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 
 import InputTexto from "@/utils/InputTexto";
-import VistaPrevia from "@/utils/VistaPrevia/VistaPrevia";
+import VistaPrevia from "./VistaPrevia/VistaPrevia";
 import InputAreaTexto from "@/utils/InputAreaTexto";
 import Button from "@/utils/Button";
 import { ColorAleatorioContext } from "@/context/ConseguirColorAleatorio";
@@ -30,7 +30,7 @@ const Box_Inputs = styled.div`
   gap: 50px;
   height: 100%;
 `;
-const VistaPreviaConfiguracion = () => {
+const VistaPreviaConfiguracion = ({setConseguirColorVistaPrevia}) => {
   const {
     colorCuerpo,
     colorNavegacion,
@@ -45,7 +45,6 @@ const VistaPreviaConfiguracion = () => {
   const { src, nombre, desc, onChangeSrc, onChangeNombre, onChangeDesc } =
     useContext(UsuarioVistaPreviaContext);
 
-  console.log(src, nombre, desc);
 
   return (
     <>
@@ -62,6 +61,7 @@ const VistaPreviaConfiguracion = () => {
           src={src}
           nombre={nombre}
           desc={desc}
+          setValue={setConseguirColorVistaPrevia}
         />
 
         <Box>
@@ -69,20 +69,20 @@ const VistaPreviaConfiguracion = () => {
             <InputTexto
               htmlFor="URL Imagen"
               placeHolder="https://www.google.com/url?sa=i&url=https%3A%2F%2Far.pinterest.com%2Fpin%2F615445105322839132%2F&psig=AOvVaw2wTI2MiGRjab6mnCxc89-P&ust=1687220847021000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNj-o82Jzv8CFQAAAAAdAAAAABAH"
-       
+              value={src}
               onChange={onChangeSrc}
             />
             <InputTexto
               htmlFor="Nombre"
               placeHolder="ElNuVaTo"
-   
+              value={nombre}
               onChange={onChangeNombre}
             />
 
             <InputAreaTexto
               htmlFor="Descripcion"
               placeHolder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ad minim veniam, quis nostrud exercitation ullamco"
-       
+              value={desc}
               onChange={onChangeDesc}
             />
           </Box_Inputs>

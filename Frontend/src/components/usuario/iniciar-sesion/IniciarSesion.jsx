@@ -33,7 +33,7 @@ const IniciarSesion = () => {
     manejoDeError,
   } = useContext(UseStateContext);
 
-  console.log(manejoDeError);
+
   return (
     <>
       <Formulario onSubmit={onSubmitIniciarSesion}>

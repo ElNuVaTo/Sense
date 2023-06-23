@@ -1,10 +1,11 @@
+import DatosDelUsuario from "@/components/configuracion-de-usuario/DatosDelUsuario";
 
 const PageConfiguracion = () => {
   return (
     <>
-      Configuracion
+      <DatosDelUsuario />
     </>
-  )
-}
+  );
+};
 
-export default PageConfiguracion
+export default PageConfiguracion;

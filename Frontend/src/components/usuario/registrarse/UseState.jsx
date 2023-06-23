@@ -28,17 +28,16 @@ const UseStateProvider = ({ children }) => {
         confirmar: confirmar,
       })
       .then((response) => {
-        setManejoDeError((prevState) => ({
-          ...prevState,
-          boolean: true,
-          texto: response.data,
-        }));
-        console.log(response.data);
-      })
-      .catch((error) => {
         setManejoDeError({
           boolean: true,
-          texto: error.response.data.mensaje,
+          texto: 'Cuenta creada con exito'
+        });
+        console.log(response.data);
+      })
+      .catch((err) => {
+        setManejoDeError({
+          boolean: true,
+          texto: "Email ya registrado",
         });
       });
   };

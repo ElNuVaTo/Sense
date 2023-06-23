@@ -1,12 +1,14 @@
+import { useRef, useEffect } from "react";
 import styled from "styled-components";
-
-import Opciones from "./Opciones";
 
 const Main = styled.div`
   display: flex;
   width: 100%;
   max-width: 780px;
   flex-direction: column;
+  margin: auto;
+  border-radius: 10px;
+  position: relative;
 `;
 const Box = styled.div`
   display: flex;
@@ -14,8 +16,11 @@ const Box = styled.div`
   width: 100%;
   height: 450px;
   background-color: ${(props) => props.cuerpo};
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
   overflow: hidden;
+  user-select: none;
+  cursor: url(https://icon-library.com/images/color-picker-icon/color-picker-icon-10.jpg),
+    pointer;
 `;
 const Navegacion = styled.nav`
   width: 100%;
@@ -26,6 +31,7 @@ const Navegacion = styled.nav`
   padding: 0 15px;
   gap: 0 20px;
   background-color: ${(props) => props.navegacion};
+  z-index: 2;
   button {
     color: ${(props) => props.textoLink};
     background-color: ${(props) => props.boton};
@@ -33,26 +39,16 @@ const Navegacion = styled.nav`
     border-radius: 5px;
     font-size: 16px;
     user-select: none;
+    cursor: default;
     :hover {
       background-color: ${(props) => props.botonHover};
     }
   }
   p {
-    color: ${(props) =>
-      props.textoLink === "#ffffff" ? "black" : props.textoLink};
+    color: ${(props) => props.textoLink};
     font-size: 18px;
-    cursor: pointer;
     user-select: none;
   }
-`;
-const Box_Opciones = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 0 0 10px 10px;
-  background: var(--Principal-Monocromatico);
-  padding: 2px 10px;
-  height: 40px;
 `;
 const Perfil = styled.div`
   display: flex;
@@ -68,10 +64,12 @@ const BoxUsuario = styled.div`
   width: 100%;
   max-width: 130px;
   height: 130px;
+  z-index: 1;
   img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    cursor: default;
   }
 `;
 const BoxDescripcion = styled.div`
@@ -81,13 +79,16 @@ const BoxDescripcion = styled.div`
   padding: 5px 10px;
   height: 130px;
   overflow: hidden;
-  p {
-    font-size: 15px;
-    color: #a1a1a1;
-  }
   b {
     font-size: 16px;
-    color: #252525;
+    color: ${(props) => props.textoNombre};
+    width: max-content;
+    z-index: 2;
+  }
+  p {
+    font-size: 15px;
+    color: ${(props) => props.textoDescripcion};
+    z-index: 2;
   }
 `;
 
@@ -103,10 +104,25 @@ const VistaPrevia = ({
   src,
   nombre,
   desc,
+
+  setValue,
 }) => {
+
+
+  const elementRef = useRef(null);
+
+  const handleClick = (event) => {
+    const { clientX, clientY } = event;
+    const element = document.elementFromPoint(clientX, clientY);
+    const style = window.getComputedStyle(element);
+    const backgroundColor = style.backgroundColor;
+
+    console.log(backgroundColor);
+  };
+
   return (
     <>
-      <Main>
+      <Main ref={elementRef} onClick={handleClick}>
         <Box cuerpo={cuerpo}>
           <Navegacion
             navegacion={navegacion}
@@ -132,10 +148,6 @@ const VistaPrevia = ({
             </BoxDescripcion>
           </Perfil>
         </Box>
-
-        <Box_Opciones>
-          <Opciones />
-        </Box_Opciones>
       </Main>
     </>
   );

@@ -10,7 +10,7 @@ const Box = styled.a`
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 280px;
   height: 380px;
   margin: auto;
 `;

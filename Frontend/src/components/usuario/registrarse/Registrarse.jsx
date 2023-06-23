@@ -35,7 +35,6 @@ const Registrarse = () => {
     manejoDeError,
   } = useContext(UseStateContext);
 
-  console.log(manejoDeError);
   return (
     <>
       <Formulario onSubmit={onSubmitCrearCuenta}>

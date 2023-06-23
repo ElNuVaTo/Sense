@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import axios from "axios";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const Href = styled(motion.ul)`
   position: absolute;
@@ -64,14 +66,30 @@ const Href = styled(motion.ul)`
   }
 `;
 
-const Usuario = ({ menuUsuario }) => {
+const Usuario = ({ menuUsuario, setMenuDesplegado }) => {
+  const router = useRouter();
+
+  const cerrarSesion = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(process.env.CERRAR_CUENTA, {
+        withCredentials: true,
+      });
+      router.push("/");
+      localStorage.setItem("Usuario", false);
+      setMenuDesplegado(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const NoVerificado = [
     { href: "/iniciar-sesion", children: "Iniciar Sesion" },
     { href: "/registrarse", children: "Registrarse" },
   ];
   const Verificado = [
-    { href: "/configuracion", children: "Configuracion" },
-    { href: "/", children: "Cerrar Sesion" },
+    // { href: "/configuracion", children: "Configuracion" },
+    { href: "/", children: "Cerrar Sesion", onClick: cerrarSesion },
   ];
 
   return (
@@ -84,10 +102,10 @@ const Usuario = ({ menuUsuario }) => {
         exit={{ y: "-100%" }}
         transition={{ duration: 0.35 }}
       >
-        {localStorage.getItem("Usuario")
+        {!!(localStorage.getItem("Usuario") === "true")
           ? Verificado.map((item, key) => (
               <li key={key}>
-                <Link href={item.href} draggable={false}>
+                <Link href={item.href} draggable={false} onClick={item.onClick}>
                   {item.children}
                 </Link>
               </li>

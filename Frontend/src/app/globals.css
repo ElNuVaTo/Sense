@@ -11,7 +11,7 @@
   --secundario-monocromatico: #fabe24;
 
   --Error: #ff595e;
-  --Modal: #c0d6eb;
+  --Modal: #263955;
 }
 
 *,
@@ -108,4 +108,27 @@ button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+/*  Panel de control HSL */
+
+#hueRange {
+  background: linear-gradient(
+    to right,
+    red,
+    yellow,
+    lime,
+    aqua,
+    blue,
+    magenta,
+    red
+  );
+}
+
+#saturationRange {
+  background: linear-gradient(to right, #fff, hsl(0, 100%, 50%));
+}
+
+#lightnessRange {
+  background: linear-gradient(to right, hsl(0, 0%, 0%), hsl(0, 0%, 50%), #fff);
 }

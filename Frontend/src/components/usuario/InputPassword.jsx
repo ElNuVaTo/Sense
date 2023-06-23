@@ -14,9 +14,9 @@ const Input = styled.input`
   padding: 5px 6px;
   border: 1px solid transparent;
   letter-spacing: 4px;
-  font-size: 18px;
+  font-size: 17px;
   ::placeholder {
-    font-size: 18px;
+    font-size: 17px;
   }
   :focus {
     border: 1px solid var(--secundario);

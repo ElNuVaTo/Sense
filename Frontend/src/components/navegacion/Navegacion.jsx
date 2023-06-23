@@ -91,7 +91,7 @@ const Navegacion = () => {
         </Main_Box>
 
         <AnimatePresence>
-          {menuDesplegado && <Usuario menuUsuario={menuUsuario} />}
+          {menuDesplegado && <Usuario menuUsuario={menuUsuario} setMenuDesplegado={setMenuDesplegado}/>}
         </AnimatePresence>
       </Main>
     </>

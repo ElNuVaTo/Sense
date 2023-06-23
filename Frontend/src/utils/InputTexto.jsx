@@ -29,7 +29,6 @@ const InputTexto = ({ htmlFor, placeHolder, value, onChange }) => {
           placeholder={placeHolder}
           value={value}
           onChange={onChange}
-          required
         />
       </Label>
     </>

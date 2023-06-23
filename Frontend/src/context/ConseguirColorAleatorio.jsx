@@ -11,9 +11,9 @@ const ColorAleatorioProvider = ({ children }) => {
   const [colorBoton, setColorBoton] = useState("#444444");
   const [colorBotonHover, setColorBotonHover] = useState("#0f0f0f");
 
-  const [colorLink, setColorLink] = useState("#ffffff");
+  const [colorLink, setColorLink] = useState("#000000");
   const [colorNombre, setColorNombre] = useState("#252525");
-  const [colorDesc, setColorDesc] = useState("#ddd");
+  const [colorDesc, setColorDesc] = useState("#303030");
 
   const onChangeColorCuerpo = (e) => setColorCuerpo(e.target.value);
   const onChangeColorNavegacion = (e) => setColorNavegacion(e.target.value);
@@ -42,34 +42,38 @@ const ColorAleatorioProvider = ({ children }) => {
     const iluminacion = resultado;
 
     const cuerpo = tinycolor(`hsl(${tono}, ${saturacion}%, ${iluminacion}%)`);
-    const navegacion = tinycolor(
-      `hsl(${tono}, ${saturacion -15}%, ${iluminacion + 5}%)`
-    );
-    const componente = tinycolor(
-      `hsl(${tono}, ${saturacion + 15}%, ${iluminacion - 5}%)`
-    );
-    
+
+    const baseMonochromatic = cuerpo.monochromatic();
+    const navegacion = baseMonochromatic[4];
+    const componente = baseMonochromatic[3];
+
     // De aca hacia abajo se maneja la
     // logica de los colores
     // complementarios
-    
-    const complementario = (tono + 180) % 360; // Calcula el tono complementario
-    
-    const boton = tinycolor(
-      `hsl(${complementario}, ${saturacion - 5}%, ${iluminacion +5}%)`
+
+    const tonoComplementario = (tono + 180) % 360;
+    const complementario = tinycolor(
+      `hsl(${tonoComplementario}, ${saturacion}%, ${iluminacion}%)`
     );
-    const botonHover = tinycolor(
-      `hsl(${complementario}, ${saturacion + 15}%, ${iluminacion -5}%)`
-    );
+    const secundarioMonochromatic = complementario.monochromatic();
+
+    const boton = secundarioMonochromatic[3];
+    const botonHover = secundarioMonochromatic[4];
 
     // Logica para lograr un buen
     // contraste con el texto
     // Verse bien en todo los colores
 
-    const textoLink = temaSeleccionado === "Blanco" ? "#000000" : "#ffffff";
-    const textoNombre = temaSeleccionado === "Blanco" ? "#252525" : "#d1d1d1";
-    const textoDescripcion =
-      temaSeleccionado === "Blanco" ? "#5e5e5e" : "#8b8b8b";
+    const textoLink = tinycolor.mostReadable(navegacion, ["#000000", "#FFF"]);
+
+    const textoNombre = tinycolor.mostReadable(componente, [
+      "#252525",
+      "#f6f6f6",
+    ]);
+    const textoDescripcion = tinycolor.mostReadable(componente, [
+      "#303030",
+      "#d7d7d7",
+    ]);
 
     return {
       cuerpo,
@@ -104,9 +108,9 @@ const ColorAleatorioProvider = ({ children }) => {
     setColorBoton(boton.toHexString());
     setColorBotonHover(botonHover.toHexString());
 
-    setColorLink(textoLink);
-    setColorNombre(textoNombre);
-    setColorDesc(textoDescripcion);
+    setColorLink(textoLink.toHexString());
+    setColorNombre(textoNombre.toHexString());
+    setColorDesc(textoDescripcion.toHexString());
   };
 
   const value = {
